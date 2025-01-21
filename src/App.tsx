@@ -95,18 +95,6 @@ function App() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent" />
               </div>
-              <motion.div
-                className="absolute inset-0 -z-10 bg-blue-500/20 rounded-2xl blur-xl"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
             </motion.div>
           </div>
         </div>
@@ -197,6 +185,44 @@ function App() {
                 <p className="text-gray-300 mt-2">{product.price}</p>
               </motion.div>
             ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-20 px-4 md:px-8 bg-gradient-to-br from-gray-800 to-black">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="max-w-7xl mx-auto"
+        >
+          <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">Contact Us</h2>
+          <div className="flex justify-center">
+            <form className="w-full md:w-1/2 bg-white/5 p-8 rounded-xl shadow-lg space-y-6 backdrop-blur-md">
+              <div className="space-y-4">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className="w-full px-4 py-2 bg-transparent border border-gray-600 rounded-xl text-white"
+                />
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="w-full px-4 py-2 bg-transparent border border-gray-600 rounded-xl text-white"
+                />
+                <textarea
+                  placeholder="Your Message"
+                  className="w-full px-4 py-2 bg-transparent border border-gray-600 rounded-xl text-white"
+                />
+              </div>
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.05 }}
+                className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow"
+              >
+                Send Message
+              </motion.button>
+            </form>
           </div>
         </motion.div>
       </section>
