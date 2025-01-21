@@ -36,7 +36,6 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-black text-white">
       {/* Hero Section */}
       <section className="min-h-screen relative overflow-hidden">
-        {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           {floatingElements.map((_, index) => (
             <motion.div
@@ -141,6 +140,61 @@ function App() {
                 </motion.div>
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                 <p className="text-gray-300">{service.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Projects Section */}
+      <section className="py-20 px-4 md:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="max-w-7xl mx-auto"
+        >
+          <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">Our Projects</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.05 }}
+                className="overflow-hidden rounded-lg"
+                onClick={() => setSelectedImage(project)}
+              >
+                <img
+                  src={project}
+                  alt={`Project ${index + 1}`}
+                  className="w-full h-72 object-cover rounded-lg shadow-lg cursor-pointer"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Products Section */}
+      <section className="py-20 px-4 md:px-8 bg-gray-800">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="max-w-7xl mx-auto"
+        >
+          <h2 className="text-4xl font-bold text-center mb-16 text-blue-400">Our Products</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.map((product, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.05 }}
+                className="overflow-hidden rounded-lg bg-white/5 p-6"
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-64 object-cover rounded-lg shadow-lg"
+                />
+                <h3 className="text-xl font-semibold text-blue-400 mt-4">{product.name}</h3>
+                <p className="text-gray-300 mt-2">{product.price}</p>
               </motion.div>
             ))}
           </div>
