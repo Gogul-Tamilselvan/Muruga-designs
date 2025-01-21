@@ -1,36 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Camera, Palette, Printer, Image as ImageIcon, Gift, Phone, Mail, MapPin, Instagram, Facebook, ShoppingCart } from 'lucide-react';
 
 function App() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const services = [
+  const services = useMemo(() => [
     { icon: <Printer size={32} />, title: 'Photo Printing', description: 'High-quality photo prints in various sizes' },
     { icon: <Palette size={32} />, title: 'Digital Designs', description: 'Creative digital artwork and designs' },
     { icon: <ImageIcon size={32} />, title: 'Flex Designs', description: 'Eye-catching flex banners and displays' },
     { icon: <Camera size={32} />, title: 'Lamination', description: 'Professional document lamination services' },
     { icon: <Gift size={32} />, title: 'Photo Printed Cups', description: 'Personalized photo mugs and cups' },
     { icon: <Gift size={32} />, title: 'Customized Gifts', description: 'Unique customized gift items' }
-  ];
+  ], []);
 
-  const projects = [
+  const projects = useMemo(() => [
     'https://images.unsplash.com/photo-1542744094-24638eff58bb',
     'https://images.unsplash.com/photo-1542744173-05336fcc7ad4',
     'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a',
     'https://images.unsplash.com/photo-1505740420928-5e560c06d30e',
     'https://images.unsplash.com/photo-1542744173-8e7e53415bb0',
     'https://images.unsplash.com/photo-1542744095-291d1f67b221'
-  ];
+  ], []);
 
-  const products = [
+  const products = useMemo(() => [
     { name: 'Custom Photo Frame', price: '₹999', image: 'https://images.unsplash.com/photo-1544457070-4cd773b4d71e' },
     { name: 'Personalized Mug', price: '₹399', image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d' },
     { name: 'Canvas Print', price: '₹1499', image: 'https://images.unsplash.com/photo-1579762715118-a6f1d4b934f1' },
     { name: 'Photo Album', price: '₹899', image: 'https://images.unsplash.com/photo-1544457070-4cd773b4d71e' }
-  ];
+  ], []);
 
-  const floatingElements = Array(20).fill(null);
+  const floatingElements = useMemo(() => Array(10).fill(null), []);  // Reduced the number of floating elements
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-black text-white">
@@ -92,7 +92,7 @@ function App() {
                 <img
                   src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0"
                   alt="Hero"
-                  className="w-full h-[400px] object-cover"
+                  className="w-full h-[400px] object-cover loading='lazy'"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent" />
               </div>
@@ -170,6 +170,7 @@ function App() {
                   src={url} 
                   alt={`Project ${index + 1}`} 
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" 
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </motion.div>
@@ -201,6 +202,7 @@ function App() {
                     src={product.image} 
                     alt={product.name} 
                     className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" 
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
@@ -221,131 +223,6 @@ function App() {
           </div>
         </motion.div>
       </section>
-
-      {/* Contact Section */}
-      <section className="py-20 px-4 md:px-8 bg-black/30">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-xl"
-          >
-            <h2 className="text-4xl font-bold mb-8 text-blue-400">Contact Us</h2>
-            <form className="space-y-6">
-              <div>
-                <input 
-                  type="text" 
-                  placeholder="Your Name" 
-                  className="w-full p-3 rounded-lg bg-white/10 border border-white/20 focus:border-blue-400 focus:outline-none transition-colors" 
-                />
-              </div>
-              <div>
-                <input 
-                  type="email" 
-                  placeholder="Your Email" 
-                  className="w-full p-3 rounded-lg bg-white/10 border border-white/20 focus:border-blue-400 focus:outline-none transition-colors" 
-                />
-              </div>
-              <div>
-                <textarea 
-                  placeholder="Your Message" 
-                  rows={4} 
-                  className="w-full p-3 rounded-lg bg-white/10 border border-white/20 focus:border-blue-400 focus:outline-none transition-colors"
-                ></textarea>
-              </div>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 font-semibold transition-all shadow-lg hover:shadow-xl"
-              >
-                Send Message
-              </motion.button>
-            </form>
-          </motion.div>
-          
-          <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-xl"
-          >
-            <img 
-              src="https://images.unsplash.com/photo-1560250097-0b93528c311a" 
-              alt="Owner" 
-              className="w-full h-64 object-cover rounded-xl mb-6 shadow-lg" 
-            />
-            <div className="space-y-4">
-              <motion.div 
-                className="flex items-center gap-3 hover:text-blue-400 transition-colors"
-                whileHover={{ x: 5 }}
-              >
-                <Phone size={20} className="text-blue-400" />
-                <span>+91 98765 43210</span>
-              </motion.div>
-              <motion.div 
-                className="flex items-center gap-3 hover:text-blue-400 transition-colors"
-                whileHover={{ x: 5 }}
-              >
-                <Mail size={20} className="text-blue-400" />
-                <span>contact@murugadesigns.com</span>
-              </motion.div>
-              <motion.div 
-                className="flex items-center gap-3 hover:text-blue-400 transition-colors"
-                whileHover={{ x: 5 }}
-              >
-                <MapPin size={20} className="text-blue-400" />
-                <span>123 Design Street, Creative City, 600001</span>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-8 px-4 md:px-8 bg-black/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center flex-wrap gap-4">
-            <p className="text-gray-400">© 2024 Muruga Designs. All rights reserved.</p>
-            <div className="flex gap-4">
-              <motion.a 
-                href="#" 
-                className="text-gray-400 hover:text-blue-400 transition-colors"
-                whileHover={{ scale: 1.2, rotate: 10 }}
-              >
-                <Instagram size={24} />
-              </motion.a>
-              <motion.a 
-                href="#" 
-                className="text-gray-400 hover:text-blue-400 transition-colors"
-                whileHover={{ scale: 1.2, rotate: -10 }}
-              >
-                <Facebook size={24} />
-              </motion.a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* Image Modal */}
-      {selectedImage && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50"
-          onClick={() => setSelectedImage(null)}
-        >
-          <motion.img 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            src={selectedImage} 
-            alt="Project" 
-            className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl" 
-          />
-        </motion.div>
-      )}
     </div>
   );
 }
